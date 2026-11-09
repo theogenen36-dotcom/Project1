@@ -3,9 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello World</title>
+  <meta name="theme-color" content="#101522">
+  <meta name="description" content="A little moment of joy, made with HTML.">
+  <title>Hello, World! — A little joy</title>
+  <style>
+    :root { color-scheme: dark; --ink:#f7f4ff; --muted:#b7b3ca; --violet:#b99aff; --pink:#ff9bc8; }
+    * { box-sizing:border-box }
+    body { margin:0; min-height:100vh; display:grid; place-items:center; overflow:hidden; color:var(--ink); font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:radial-gradient(ellipse at 18% 18%,#30244c 0,transparent 42%),radial-gradient(ellipse at 85% 78%,#173b48 0,transparent 42%),#101522; }
+    body::before,body::after { content:""; position:fixed; width:340px; height:340px; border:1px solid #ffffff12; border-radius:50%; pointer-events:none }
+    body::before { top:-170px; right:12% } body::after { bottom:-210px; left:8%; width:440px; height:440px }
+    .card { position:relative; width:min(680px, calc(100% - 40px)); padding:clamp(36px,8vw,76px); text-align:center; border:1px solid #ffffff20; border-radius:28px; background:linear-gradient(145deg,#ffffff12,#ffffff06); box-shadow:0 28px 100px #0005; backdrop-filter:blur(18px); animation:appear .8s both cubic-bezier(.2,.8,.2,1) }
+    .spark { display:grid; place-items:center; width:58px; height:58px; margin:0 auto 28px; border:1px solid #ffffff25; border-radius:19px; color:#171321; font-size:27px; background:linear-gradient(135deg,var(--violet),var(--pink)); box-shadow:0 8px 32px #c297ff50; transform:rotate(-7deg) }
+    .eyebrow { margin:0 0 12px; color:var(--muted); font-size:12px; font-weight:700; letter-spacing:.2em; text-transform:uppercase }
+    h1 { margin:0; font-size:clamp(46px,10vw,82px); line-height:1; letter-spacing:-.065em }
+    h1 span { color:transparent; background:linear-gradient(100deg,#d1baff,var(--pink)); background-clip:text; -webkit-background-clip:text }
+    .message { max-width:400px; margin:22px auto 30px; color:var(--muted); font-size:16px; line-height:1.7 }
+    button { display:inline-flex; align-items:center; gap:10px; padding:13px 19px; border:1px solid #ffffff28; border-radius:999px; color:var(--ink); font:600 14px inherit; font-family:inherit; cursor:pointer; background:#ffffff10; transition:transform .2s,background .2s,border-color .2s }
+    button:hover { transform:translateY(-2px); background:#ffffff1c; border-color:#ffffff55 } button:active { transform:translateY(0) }
+    .dot { width:8px; height:8px; border-radius:50%; background:#95f0c1; box-shadow:0 0 12px #95f0c1 }
+    footer { margin-top:38px; color:#89869c; font-size:12px }
+    @keyframes appear { from { opacity:0; transform:translateY(18px) scale(.98) } to { opacity:1; transform:none } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; scroll-behavior:auto!important } }
+  </style>
 </head>
 <body>
-  <h1>Hello World!</h1>
+  <main class="card">
+    <div class="spark" aria-hidden="true">✦</div>
+    <p class="eyebrow">A tiny page with a big hello</p>
+    <h1>Hello,<br><span>World!</span></h1>
+    <p class="message" id="message">A fresh little corner of the internet. Glad you’re here.</p>
+    <button id="helloButton" type="button"><span class="dot" aria-hidden="true"></span><span>Send a little joy</span></button>
+    <footer>Made with curiosity &amp; a little bit of HTML</footer>
+  </main>
+  <script>
+    const button = document.querySelector('#helloButton');
+    const message = document.querySelector('#message');
+    const greetings = [
+      'A fresh little corner of the internet. Glad you’re here.',
+      'You showed up. That’s already something wonderful.',
+      'The world feels a little brighter with you in it.',
+      'Take a breath. You’re right where you need to be.'
+    ];
+    let index = 0;
+    button.addEventListener('click', () => {
+      index = (index + 1) % greetings.length;
+      message.textContent = greetings[index];
+    });
+  </script>
 </body>
 </html>
